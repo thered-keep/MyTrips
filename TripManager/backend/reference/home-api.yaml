@@ -1,0 +1,355 @@
+openapi: 3.1.0
+x-stoplight:
+  id: kx3dp2kzxypmw
+info:
+  title: home-api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /Trips:
+    parameters: []
+    get:
+      summary: Get Trips
+      tags: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+                    x-stoplight:
+                      id: a7nszgtql3hzh
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '404':
+          description: User Not Found
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+    post:
+      summary: ''
+      operationId: post-Trips
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  x-stoplight:
+                    id: zt3eht3ryegt6
+                  format: uuid
+                name:
+                  type: string
+                  x-stoplight:
+                    id: t1zn0z91i5s07
+                destinations:
+                  type: array
+                  x-stoplight:
+                    id: zteulvruwzbgh
+                  items:
+                    $ref: '#/components/schemas/Trip'
+                    x-stoplight:
+                      id: 0g7ayyy55dddi
+                description:
+                  type: string
+                  x-stoplight:
+                    id: 0c02byxlfq4xp
+                foto:
+                  type: string
+                  x-stoplight:
+                    id: yrjn40drya2wf
+                participants:
+                  type: array
+                  x-stoplight:
+                    id: pb6syr7j6c2e1
+                  items: {}
+                start:
+                  type: string
+                  format: date-time
+                  description: start date of the trip
+                  x-stoplight:
+                    id: rxwdv8phmu4qb
+                end:
+                  type: string
+                  format: date-time
+                  description: start date of the trip
+                  x-stoplight:
+                    id: f16i3zsncg9wd
+              required:
+                - id
+                - name
+                - description
+                - start
+                - end
+            examples: {}
+        description: ''
+      description: ''
+    delete:
+      summary: ''
+      operationId: delete-Trips
+      responses:
+        '200':
+          description: OK
+  '/Trips/{tripId}':
+    parameters:
+      - schema:
+          type: string
+        name: tripId
+        in: path
+        required: true
+        description: ID of the Trip
+    delete:
+      summary: ''
+      operationId: delete-Trips-id
+      responses:
+        '201':
+          description: Created
+        '204':
+          description: No Content
+    put:
+      summary: ''
+      operationId: put-Trips-tripId
+      responses:
+        '201':
+          description: Created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  x-stoplight:
+                    id: 202t36qpxnd1m
+                description:
+                  type: string
+                  x-stoplight:
+                    id: 3bee9v9bzmuck
+            examples:
+              Example 1:
+                value:
+                  name: string
+                  description: string
+        description: ''
+  /Destinations:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+                  x-stoplight:
+                    id: ng6eqegriky2c
+      operationId: get-Destination
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-Destinations
+      responses:
+        '201':
+          description: OK .Destination added
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+  '/Destination/{DestId}':
+    parameters:
+      - schema:
+          type: string
+        name: DestId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../../home-api.yaml#/components/schemas/Destination
+      operationId: get-Destination-DestId
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+    Trip:
+      title: Trip
+      x-stoplight:
+        id: 56r9pevwa4bt6
+      type: object
+      examples:
+        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          name: string
+          description: string
+          foto: string
+          destinations:
+            - null
+          participants:
+            - null
+          createdAt: '2019-08-24T14:15:22Z'
+          updatedAt: '2019-08-24T14:15:22Z'
+          start: '2019-08-24T14:15:22Z'
+          end: '2019-08-24T14:15:22Z'
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          x-stoplight:
+            id: ufk21qfosorae
+        description:
+          type: string
+          x-stoplight:
+            id: xjz4tqhsy0d0i
+        foto:
+          type: string
+          x-stoplight:
+            id: p1jec4vudz5h0
+        destinations:
+          type: array
+          x-stoplight:
+            id: 37y0n2uqpe1vd
+          items:
+            $ref: '#/components/schemas/Destination'
+            x-stoplight:
+              id: zlvmewandmh5g
+        participants:
+          type: array
+          x-stoplight:
+            id: iec3q37lhmxxs
+          minItems: 0
+          uniqueItems: true
+          items: {}
+        createdAt:
+          type: string
+          format: date-time
+          x-stoplight:
+            id: ikdnlxgsr0a51
+        updatedAt:
+          type: string
+          format: date-time
+          x-stoplight:
+            id: 18l2xrfcsyhs5
+        start:
+          type: string
+          format: date-time
+          description: start date of the trip
+        end:
+          type: string
+          format: date-time
+          description: end date of the trip
+      required:
+        - id
+        - name
+        - description
+    Destination:
+      title: Destination
+      x-stoplight:
+        id: i1bznakocoiyt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: A uniqe destination identifier
+        name:
+          type: string
+          x-stoplight:
+            id: 1jnah5ud08t33
+        description:
+          type: string
+          x-stoplight:
+            id: mpniueg5j0af5
+        activities:
+          type: array
+          x-stoplight:
+            id: pbi9hbmj80543
+          uniqueItems: true
+          items: {}
+        fotos:
+          type: array
+          x-stoplight:
+            id: 0icjt151cl34c
+          items: {}
+        start:
+          type: string
+          format: date-time
+          description: start date of the trip destination
+        end:
+          type: string
+          format: date-time
+          description: end date of the trip destination
+      required:
+        - id
+      description: ''
+      examples: []
